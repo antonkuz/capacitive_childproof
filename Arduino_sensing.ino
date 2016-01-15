@@ -11,7 +11,7 @@
 //               |            V 1N4148 diode
 //              GND           |
 //                            |
-//Analog 0 ---+------+--------+
+// Analog 0 ---+------+--------+
 //            |      |
 //          100pf   1MOmhm
 //            |      |
@@ -27,10 +27,10 @@
 #define ADULT_BUTTON_PIN 4
 #define CHILD_BUTTON_PIN 5
 #define NOTHING_LED_PIN 6
-#define ADULT_LED_PIN 7
-#define CHILD_LED_PIN 10
+#define ADULT_LED_PIN 12
+#define CHILD_LED_PIN 11
 
-#define HOLD_CONFIRM 50
+#define HOLD_CONFIRM 10
 
 #define SET(x,y) (x |=(1<<y))				//-Bit set/clear macros
 #define CLR(x,y) (x &= (~(1<<y)))       		// |
@@ -45,11 +45,14 @@ float freq[N];
 
 char holderIndex;
 char holderCount;
-char lastMelody;
+
+/* for proper starting */
+char nothingButtonPressed = 0;
+char adultButtonPressed = 0;
+char childButtonPressed = 0;
 
 void setup()
 {
-  
   TCCR1A=0b10000010;        //-Set up frequency generator
   TCCR1B=0b00011001;        //-+
   ICR1=110;
@@ -68,14 +71,13 @@ void setup()
   pinMode(NOTHING_LED_PIN, OUTPUT);
   pinMode(ADULT_LED_PIN, OUTPUT);
   pinMode(CHILD_LED_PIN, OUTPUT); 
-  analogWrite(SPEAKERS_PIN, 0);
-  analogWrite(NOTHING_LED_PIN, 0);
-  analogWrite(ADULT_LED_PIN, 0);
-  analogWrite(CHILD_LED_PIN, 0); 
+  digitalWrite(SPEAKERS_PIN, LOW);
+  digitalWrite(NOTHING_LED_PIN, LOW);
+  digitalWrite(ADULT_LED_PIN, LOW);
+  digitalWrite(CHILD_LED_PIN, LOW);
 
   holderIndex = NOTHING_INDEX;
   holderCount = 0;
-  lastMelody = NOTHING_INDEX;
 }
 
 void loop()
