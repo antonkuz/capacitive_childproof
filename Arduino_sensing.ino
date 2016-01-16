@@ -27,7 +27,7 @@
 #define ADULT_BUTTON_PIN 4
 #define CHILD_BUTTON_PIN 5
 #define NOTHING_LED_PIN 6
-#define ADULT_LED_PIN 12
+#define ADULT_LED_PIN 7
 #define CHILD_LED_PIN 11
 
 #define HOLD_CONFIRM 10

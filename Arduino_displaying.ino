@@ -112,9 +112,9 @@ void process_data(){
               holderCount = 0;
               holderIndex = CHILD_INDEX;
             }
-          digitalWrite(CHILD_LED_PIN, HIGH);
-          delay(30);
           digitalWrite(CHILD_LED_PIN, LOW);
+          delay(30);
+          digitalWrite(CHILD_LED_PIN, HIGH);
           }
           break;
         default: 
